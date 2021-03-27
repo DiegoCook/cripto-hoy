@@ -1,6 +1,7 @@
 <template>
   <div>
-    <px-assets-table :assets="assets" />
+    <propagate-loader :loading="isLoading" :color="'#47f58a'" :size="15" />
+    <px-assets-table v-show="!isLoading" :assets="assets" />
   </div>
 </template>
 
@@ -13,12 +14,17 @@ export default {
 
   data() {
     return {
+      isLoading: false,
       assets: [],
     };
   },
 
   created() {
-    api.getAssets().then((assets) => (this.assets = assets));
+    this.isLoading = true;
+    api
+      .getAssets()
+      .then((assets) => (this.assets = assets))
+      .finally(() => (this.isLoading = false));
   },
 };
 </script>

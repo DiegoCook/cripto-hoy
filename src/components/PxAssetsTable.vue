@@ -39,7 +39,9 @@
           <small class="ml-1 text-gray-400">{{ a.symbol }}</small>
         </td>
         <td>
-          {{ a.priceUsd | dollar }}
+          <router-link :to="{ name: 'coin-detail', params: { id: a.id } }">
+            {{ a.priceUsd | dollar }}
+          </router-link>
         </td>
         <td>
           {{ a.marketCapUsd | dollar }}
@@ -49,7 +51,15 @@
         >
           {{ a.changePercent24Hr | percent }}
         </td>
-        <td class="hidden sm:block"></td>
+        <td class="hidden sm:block">
+          <router-link :to="{ name: 'coin-detail', params: { id: a.id } }">
+            <button
+              class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-2 border border-green-500 hover:border-transparent rounded"
+            >
+              Detalle
+            </button>
+          </router-link>
+        </td>
       </tr>
     </tbody>
   </table>
